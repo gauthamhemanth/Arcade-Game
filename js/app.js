@@ -39,6 +39,7 @@ var Player = function(xpos, ypos) {
 
 };
 
+// drwa the player with latest position on the canvas
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.image), this.xpos, this.ypos);
 };
@@ -47,6 +48,7 @@ Player.prototype.update = function(dt) {};
 
 var player = new Player(400, 400);
 
+//function handles the user inputs and repositions the player
 Player.prototype.handleInput = function(direction) {
 
     if (direction === 'left' && this.xpos > 0) {
@@ -64,16 +66,17 @@ Player.prototype.handleInput = function(direction) {
     }
 };
 
+//function to check if the player is in safe zone or not, if not then the player position is reset
 Player.prototype.checkCollisions = function() {
 
     for (var i = 0; i < allEnemies.length; i++) {
         //if the player is not in the safe zone
-        if ((player.xpos < allEnemies[i].x + 70) &&
-            ((player.xpos + 70) > allEnemies[i].x) &&
-            (player.ypos < (allEnemies[i].y + 20)) &&
-            ((player.ypos + 20) > allEnemies[i].y)) {
-            player.xpos = 200;
-            player.ypos = 400;
+        if ((this.xpos < allEnemies[i].x + 70) &&
+            ((this.xpos + 70) > allEnemies[i].x) &&
+            (this.ypos < (allEnemies[i].y + 20)) &&
+            ((this.ypos + 20) > allEnemies[i].y)) {
+            this.xpos = 200;
+            this.ypos = 400;
         }
     }
 
